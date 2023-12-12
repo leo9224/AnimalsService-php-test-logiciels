@@ -11,26 +11,26 @@
 
 use PHPUnit\Framework\TestCase;
 
-require __DIR__ . '/../../src/ContactService.php';
+require __DIR__ . '/../../src/AnimalService.php';
 
 /**
  * * @covers invalidInputException
- * @covers \ContactService
+ * @covers \AnimalService
  *
  * @internal
  */
-final class ContactServiceUnitTest extends TestCase {
-    private $contactService;
+final class AnimalServiceUnitTest extends TestCase {
+    private $animalService;
 
     public function __construct(string $name = null, array $data = [], $dataName = '') {
         parent::__construct($name, $data, $dataName);
-        $this->contactService = new ContactService();
+        $this->animalService = new AnimalService();
     }
 
-    public function testCreationContactWithoutAnyText() {
+    public function testCreationAnimalWithoutAnyText() {
         $this->expectException(invalidInputException::class);
         $this->expectExceptionMessage('le nom doit être renseigné');
-        $this->contactService->createContact('', '');
+        $this->animalService->createAnimal('', '');
     }
 
 }

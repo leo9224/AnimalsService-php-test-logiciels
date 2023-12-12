@@ -11,31 +11,31 @@
 
 use PHPUnit\Framework\TestCase;
 
-require __DIR__.'/../../src/ContactService.php';
+require __DIR__ . '/../../src/AnimalService.php';
 
 /**
  * * @covers invalidInputException
- * @covers \ContactService
+ * @covers \AnimalService
  *
  * @internal
  */
-final class ContactServiceIntegrationTest extends TestCase
+final class AnimalServiceIntegrationTest extends TestCase
 {
-    private $contactService;
+    private $animalService;
 
     public function __construct(string $name = null, array $data = [], $dataName = '') {
         parent::__construct($name, $data, $dataName);
-        $this->contactService = new ContactService();
+        $this->animalService = new AnimalService();
     }
 
-    public function testCreationContact()
+    public function testCreationAnimal()
     {
-        static::assertTrue($this->contact->createContact('testNom', 'testPrenom'));
-        $data = $this->contact->getAllContacts();
-        // echo "Creation contact :";
+        static::assertTrue($this->animalService->createAnimal('testNom', 'testnumeroIdentification'));
+        $data = $this->animalService->getAllAnimals();
+        // echo "Creation animal :";
         // echo var_dump($data);
         static::assertSame('testNom', $data[0]['nom']);
-        static::assertSame('testPrenom', $data[0]['prenom']);
+        static::assertSame('testnumeroIdentification', $data[0]['numeroIdentifcation']);
         $this->id = $data[0]['id'];
 
     }

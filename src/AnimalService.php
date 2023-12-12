@@ -11,34 +11,34 @@
 
 require 'invalidInputException.php';
 
-class ContactService {
+class AnimalService {
     public $pdo;
 
     /**
-     * ContactService constructor.
+     * AnimalService constructor.
      * Initialise la BDD
      */
     public function __construct() {
-        $this->pdo = new PDO('sqlite:' . __DIR__ . '/contacts.sqlite');
+        $this->pdo = new PDO('sqlite:' . __DIR__ . '/animals.sqlite');
 
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**
-     * permet de de renvoyer les détails d'un contact
-     * @param $id l'identifiant du contact recherché
+     * permet de de renvoyer les détails d'un animal
+     * @param $id l'identifiant du animal recherché
      * @return mixed le retour de la requete SQL
      * @throws invalidInputException en cas d'erreur de paramètre
      */
-    public function getContact($id) {
+    public function getAnimal($id) {
         if (empty($id)) {
             throw new invalidInputException("l'id doit être renseigné");
         }
         if (!is_numeric($id) || $id < 0) {
             throw new invalidInputException("l'id doit être un entier non nul");
         }
-        $req = $this->pdo->query('SELECT * from contacts where id =' . $id);
+        $req = $this->pdo->query('SELECT * from animal where id =' . $id);
 
         $row = $req->fetchAll();
 
@@ -50,19 +50,19 @@ class ContactService {
     }
 
     /**
-     * Effectue une recherche de contact sur nom ou prénom
+     * Effectue une recherche de animal sur nom ou prénom
      * @param $search le critère de recherche
      * @return array le retour de la requete SQL
      * @throws invalidInputException en cas d'erreur de paramètre
      */
-    public function searchContact($search) {
+    public function searchAnimal($search) {
         if (empty($search)) {
             throw new invalidInputException('search doit être renseigné');
         }
         if (!is_string($search)) {
             throw new invalidInputException('search doit être une chaine de caractères');
         }
-        $req = "SELECT * from contacts where nom like '%" . $search . "%' or prenom like '%" . $search . "%'";
+        $req = "SELECT * from animal where nom like '%" . $search . "%' or numeroIdentifcation like '%" . $search . "%'";
 
         $res = $this->pdo->query($req);
 
@@ -75,11 +75,11 @@ class ContactService {
     }
 
     /**
-     * Récupère tous les contacts en BDD
+     * Récupère tous les animals en BDD
      * @return array le retour de la requete SQL
      */
-    public function getAllContacts() {
-        $req = $this->pdo->query('SELECT * from contacts');
+    public function getAllAnimals() {
+        $req = $this->pdo->query('SELECT * from animal');
 
         $row = $req->fetchAll();
 
@@ -90,36 +90,36 @@ class ContactService {
     }
 
     /**
-     * Créé un nouveau contact
-     * @param $nom le nom du contact
-     * @param $prenom le prénom du contact
+     * Créé un nouveau animal
+     * @param $nom le nom du animal
+     * @param $numeroIdentification le prénom du animal
      * @return bool true si ok, false si erreur SQL
      * @throws invalidInputException en cas d'erreur de paramètre
      */
-    public function createContact($nom, $prenom) {
+    public function createAnimal($nom, $numeroIdentification) {
         if (empty($nom) || !is_string($nom)) {
             throw new invalidInputException('le nom doit être renseigné');
         }
-        if (empty($prenom) && !is_string($prenom)) {
-            throw new invalidInputException('le prenom doit être renseigné');
+        if (empty($numeroIdentification) && !is_string($numeroIdentification)) {
+            throw new invalidInputException('le numeroIdentification doit être renseigné');
         }
-        $stmt = $this->pdo->prepare('INSERT INTO contacts (nom, prenom) VALUES (:nom, :prenom)');
+        $stmt = $this->pdo->prepare('INSERT INTO animal (nom, numeroIdentifcation) VALUES (:nom, :numeroIdentification)');
 
         return $stmt->execute([
             'nom' => $nom,
-            'prenom' => $prenom,
+            'numeroIdentification' => $numeroIdentification,
         ]);
     }
 
     /**
-     * Créé un nouveau contact
-     * @param $id l'id du contact à modifier
-     * @param $nom le nom du contact
-     * @param $prenom le prénom du contact
+     * Créé un nouveau animal
+     * @param $id l'id du animal à modifier
+     * @param $nom le nom du animal
+     * @param $numeroIdentification le prénom du animal
      * @return bool true si ok, false si erreur SQL
      * @throws invalidInputException en cas d'erreur de paramètre
      */
-    public function updateContact($id, $nom, $prenom) {
+    public function updateAnimal($id, $nom, $numeroIdentification) {
         if (empty($nom) && !is_string($nom)) {
             throw new invalidInputException('le nom  doit être renseigné');
         }
@@ -130,32 +130,32 @@ class ContactService {
         if (!is_numeric($id) || $id < 0) {
             throw new invalidInputException("l'id doit être un entier non nul");
         }
-        if (empty($prenom) && !is_string($prenom)) {
-            throw new invalidInputException('le prenom doit être renseigné');
+        if (empty($numeroIdentification) && !is_string($numeroIdentification)) {
+            throw new invalidInputException('le numeroIdentification doit être renseigné');
         }
-        $stmt = $this->pdo->prepare('UPDATE contacts SET nom=:nom, prenom=:prenom where id=:id');
+        $stmt = $this->pdo->prepare('UPDATE animal SET nom=:nom, numeroIdentifcation=:numeroIdentification where id=:id');
 
         return $stmt->execute([
             'nom' => $nom,
-            'prenom' => $prenom,
+            'numeroIdentification' => $numeroIdentification,
             'id' => $id,
         ]);
     }
 
     /**
-     * Supprime un contact par son id
-     * @param $id l'id du contact à supprimer
+     * Supprime un animal par son id
+     * @param $id l'id du animal à supprimer
      * @return bool true si SQL ok, false si non
      * @throws invalidInputException en cas d'erreur de paramètre
      */
-    public function deleteContact($id) {
+    public function deleteAnimal($id) {
         if (null === $id) {
             throw new invalidInputException("l'id doit être renseigné");
         }
         if (!is_numeric($id) || $id < 0) {
             throw new invalidInputException("l'id doit être un entier non nul");
         }
-        $stmt = $this->pdo->prepare('DELETE from contacts where id=:id');
+        $stmt = $this->pdo->prepare('DELETE from animal where id=:id');
 
         return $stmt->execute([
             'id' => $id,
@@ -163,10 +163,10 @@ class ContactService {
     }
 
     /**
-     * Supprime tous les contacts
+     * Supprime tous les animals
      * @return false|PDOStatement
      */
-    public function deleteAllContact() {
-        return $this->pdo->query('DELETE from contacts');
+    public function deleteAllAnimal() {
+        return $this->pdo->query('DELETE from animal');
     }
 }
