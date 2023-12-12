@@ -1,6 +1,6 @@
-# Ratrapage Test logiciel
+# Ratrapage Industrialisation logiciel
 
-Voici un service de gestion de contact.
+Voici un service de gestion d'animaux.
 
 Le projet contient un test unitaire et un test d'intégration.
 
