@@ -49,5 +49,4 @@ final class AnimalServiceIntegrationTest extends TestCase
     public function testDelete()
     {
     }
-
 }
