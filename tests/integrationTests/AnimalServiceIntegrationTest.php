@@ -91,6 +91,9 @@ final class AnimalServiceIntegrationTest extends TestCase
         $this->animalService->deleteAnimal(2);
         $this->assertEquals([["id"=>1,"nom"=>"lapin","numeroIdentifcation"=>"1"]],$this->animalService->getAllAnimals());
 
+        $this->animalService->deleteAnimal(1);
+        $this->assertEmpty($this->animalService->getAllAnimals());
+
         $this->animalService->deleteAllAnimal();
     }
 }

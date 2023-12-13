@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="376ba0f1-8d37-439a-93dc-420ee9eb6600" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/animals.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/src/animals.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/integrationTests/AnimalServiceIntegrationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integrationTests/AnimalServiceIntegrationTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/unitTests/AnimalServiceUnitTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unitTests/AnimalServiceUnitTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +94,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1702477172993</updated>
-      <workItem from="1702477174765" duration="4365000" />
+      <workItem from="1702477174765" duration="4517000" />
     </task>
     <servers />
   </component>
