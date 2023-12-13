@@ -28,16 +28,26 @@ final class AnimalServiceIntegrationTest extends TestCase
         $this->animalService = new AnimalService();
     }
 
-    public function testCreationAnimal()
+    // test de suppression de toute les données, nécessaire pour nettoyer la bdd de tests à la fin
+    public function testDeleteAll()
     {
-        static::assertTrue($this->animalService->createAnimal('testNom', 'testnumeroIdentification'));
-        $data = $this->animalService->getAllAnimals();
-        // echo "Creation animal :";
-        // echo var_dump($data);
-        static::assertSame('testNom', $data[0]['nom']);
-        static::assertSame('testnumeroIdentification', $data[0]['numeroIdentifcation']);
-        $this->id = $data[0]['id'];
+    }
 
+
+    public function testCreation()
+    {
+    }
+
+    public function testSearch()
+    {
+    }
+
+    public function testModify()
+    {
+    }
+
+    public function testDelete()
+    {
     }
 
 }

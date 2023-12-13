@@ -1,20 +1,15 @@
-# Ratrapage Industrialisation logiciel
+# Tests logiciels php
 
 Voici un service de gestion d'animaux.
+A vous de faire les tests unitaires pour valider les règles métiers.
+A vous de faire les tests d'intégrations pour valider le fonctionnement avec la BDD.
 
-Le projet contient un test unitaire et un test d'intégration.
+Quelques méthodes de tests ont leur définition d'écrite mais pas le corps, à vous de les remplir et d'ajouter les méthodes manquantes.
 
-Vous devez, soit sur gitlab, soit sur github, récupérer ce projet (fork) et réaliser le pipeline d'intégration continue.
+100% des règles métiers doivent être testées.
+100% des processus doivent être validés.
 
-Voici ce qui devra se trouver dans la pipeline étape par étape :
-- CSFixer
-- PhpStan
-- execution test unitaire avec couverture
-- execution test d'intégration avec couverture
-- analyse sonar avec envoi des rapports de couverture précédent
-- vérification de la barrière de qualité de sonar (Quality gate)
-
-Si vous partez sur Github, effectuez un fork du projet, je vous retrouverez pour la correction.
-Si vous partez sur Gitlab, envoyez moi un mail avec le lien public de votre repository
-
+Faites un Fork du projet et pensez à effectuer vos commits régulièrement.
 Seul le dernier commit avant l'heure de fin de l'examen sera pris en compte.
+
+Bon courage.

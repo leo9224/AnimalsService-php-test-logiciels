@@ -27,10 +27,23 @@ final class AnimalServiceUnitTest extends TestCase {
         $this->animalService = new AnimalService();
     }
 
+
     public function testCreationAnimalWithoutAnyText() {
-        $this->expectException(invalidInputException::class);
-        $this->expectExceptionMessage('le nom doit être renseigné');
-        $this->animalService->createAnimal('', '');
+    }
+
+    public function testCreationAnimalWithoutName() {
+    }
+
+    public function testCreationAnimalWithoutNumber() {
+    }
+
+    public function testSearchAnimalWithNumber() {
+    }
+
+    public function testModifyAnimalWithInvalidId() {
+    }
+
+    public function testDeleteAnimalWithTextAsId() {
     }
 
 }
