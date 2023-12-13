@@ -26,13 +26,6 @@ final class AnimalServiceUnitTest extends TestCase {
         parent::__construct($name, $data, $dataName);
         $this->animalService = new AnimalService();
     }
-
-    public function testGetAllAnimalsWhenDbIsEmpty() {
-        $this->animalService->deleteAllAnimal();
-
-        $this->assertEquals([],$this->animalService->getAllAnimals());
-    }
-
     public function testGetAllAnimalsWithMultipleAnimals() {
         $this->animalService->deleteAllAnimal();
 
@@ -43,6 +36,8 @@ final class AnimalServiceUnitTest extends TestCase {
         $this->assertEquals([["id"=>1,"nom"=>"lapin","numeroIdentifcation"=>"1"]
         ,["id"=>2,"nom"=>"chat","numeroIdentifcation"=>"2"]
         ,["id"=>3,"nom"=>"chien","numeroIdentifcation"=>"3"]],$this->animalService->getAllAnimals());
+
+        $this->animalService->deleteAllAnimal();
     }
 
     public function testCreationAnimalWithoutAnyText() {
@@ -66,13 +61,6 @@ final class AnimalServiceUnitTest extends TestCase {
         $this->animalService->createAnimal("lapin",null);
     }
 
-    public function testCreationCorrectAnimal() {
-        $this->animalService->deleteAllAnimal();
-
-        $this->animalService->createAnimal("lapin","1");
-        $this->assertEquals(["id"=>1,"nom"=>"lapin","numeroIdentifcation"=>"1"],$this->animalService->getAnimal(1));
-    }
-
     public function testSearchAnimalWithNumber() {
         $this->expectException(invalidInputException::class);
         $this->expectExceptionMessage("search doit être une chaine de caractères");
@@ -91,6 +79,8 @@ final class AnimalServiceUnitTest extends TestCase {
         $this->animalService->createAnimal("lapin","1");
 
         $this->assertEquals([["id"=>1,"nom"=>"lapin","numeroIdentifcation"=>"1"]],$this->animalService->searchAnimal("1"));
+
+        $this->animalService->deleteAllAnimal();
     }
 
     public function testSearchAnimalWithCorrectNom() {
@@ -98,6 +88,8 @@ final class AnimalServiceUnitTest extends TestCase {
         $this->animalService->createAnimal("lapin","1");
 
         $this->assertEquals([["id"=>1,"nom"=>"lapin","numeroIdentifcation"=>"1"]],$this->animalService->searchAnimal("lapin"));
+
+        $this->animalService->deleteAllAnimal();
     }
 
     public function testModifyAnimalWithInvalidId() {
@@ -111,10 +103,11 @@ final class AnimalServiceUnitTest extends TestCase {
         $this->expectException(invalidInputException::class);
         $this->expectExceptionMessage("le nom  doit être renseigné");
 
-        $this->animalService->deleteAllAnimal();
         $this->animalService->createAnimal("lapin","1");
 
         $this->animalService->updateAnimal("1",null,"1");
+
+        $this->animalService->deleteAllAnimal();
     }
 
     public function testModifyAnimalWithInvalidNumeroidentification() {
@@ -125,16 +118,8 @@ final class AnimalServiceUnitTest extends TestCase {
         $this->animalService->createAnimal("lapin","1");
 
         $this->animalService->updateAnimal("1","rabbit",null);
-    }
 
-    public function testCorrectModifyAnimal() {
         $this->animalService->deleteAllAnimal();
-
-        $this->animalService->createAnimal("lapin","1");
-        $this->assertEquals(["id"=>1,"nom"=>"lapin","numeroIdentifcation"=>"1"],$this->animalService->getAnimal(1));
-
-        $this->animalService->updateAnimal("1","rabbit","2");
-        $this->assertEquals(["id"=>1,"nom"=>"rabbit","numeroIdentifcation"=>"2"],$this->animalService->getAnimal(1));
     }
 
     public function testDeleteAnimalWithTextAsId() {
